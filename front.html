@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <h1 class="Title">Regitrar Nueva Persona</h1>
+    <form id="frm">
+        <label>Nombre: </label>
+        <input type="text" name="Nombre" id="Nombre">
+        <br>
+        <label>Username: </label>
+        <input type="text" name="Username" id="usr">
+        <br>
+        <label>Contraseña: </label>
+        <input type="password" name="password" id="pwd">
+        <input class="boton" type="button" value="Guardar" onclick="Enviar();">
+    </form>
+</body>
+<script>
+    var url = "https://api-forgames.herokuapp.com/student";
+    function Enviar() {
+        if (document.getElementById("Nombre").value != ""
+            && document.getElementById("usr").value != ""
+            && document.getElementById("pwd").value != "") {
+            Post();
+        } else {
+            alert("No hay datos para enviar");
+        }
+    }
+
+    function Post() {
+        let persona = {
+            idSchool: "4",
+            schoolName: "Uninorte",
+            students: {
+                studentName: document.getElementById("Nombre").value,
+                age: "",
+                username: document.getElementById("usr").value,
+                password: document.getElementById("pwd").value
+            }
+        }
+        console.log(persona);
+        fetch(url, {
+            method: "PUT",
+            body: JSON.stringify(persona),
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                console.log("Done");
+                return response.text();
+            } else {
+                alert("Error al ejecutar solicitud");
+            }
+        })
+
+        document.getElementById("Nombre").value = "";
+        document.getElementById("usr").value = "";
+        document.getElementById("pwd").value = "";
+    }
+
+    function Get() {
+        fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (Data) {
+            console.log(Data);
+            var div = document.getElementById("datos");
+            Data.forEach(element => {
+                var nombre = document.createElement("h1");
+                var username = document.createElement("h1");
+                nombre.innerText = element.name;
+                username.innerText = element.username;
+                div.appendChild(nombre);
+                div.appendChild(username);
+            });
+        })
+    }
+</script>
+
+</html>

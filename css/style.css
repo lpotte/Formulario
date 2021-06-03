@@ -1,0 +1,46 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+h1{
+    text-align: center;
+}
+form{
+	width:300px;
+	padding:16px;
+	margin:auto;
+    background: #F5F6F7;
+    width: 45em;
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    align-self: center;
+    font-size: medium;
+}
+
+input{
+    align-self: center;
+    width: 20em;
+    height: 32px;
+    border-radius: 3px;
+    margin: 10px;
+    border-color: gray;
+}
+.boton{
+    border-radius: 40px;
+    background-color: rgb(109, 189, 128);
+    color: white;
+    height: 50px;
+    width: 150px;
+    margin: 10px;
+    border: 0;
+    align-self: center;
+}
+
+.datos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-self: center;
+}
